@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0236)file:///C:/Users/93729/xwechat_files/wxid_ulfr0bwwa86t22_2fea/msg/file/2026-04/%E7%9B%9B%E5%94%90%E5%A4%9C%E5%B8%82%E5%8D%87%E7%BA%A7%E8%AE%A1%E7%AE%97%E5%99%A8_v3.2.3_%E4%B8%8A%E5%AE%98%E5%A9%89%E5%84%BF%E4%BF%AE%E6%AD%A3%E7%89%88.html -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>盛唐夜市 · 升级计算器 v4.1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1008;color:#f5d98a;font-family:'Noto Serif SC','Songti SC','STSong',serif;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+input[type=text],select,textarea{background:#120e06;color:#f5d98a;border:1.5px solid #a08030;border-radius:6px;padding:5px 6px;font-size:13px;font-weight:700;font-family:inherit;outline:none;-webkit-appearance:none}
+input:disabled{border-color:#444;color:#555;background:#221a10}
+button{font-family:inherit;cursor:pointer}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:rgba(212,168,67,.15);border-radius:2px}
+#hdr{flex-shrink:0;padding:6px 10px 5px;border-bottom:1px solid rgba(212,168,67,.12)}
+#rank{flex:1;overflow-y:auto;padding:3px 8px 5px}
+#bot{flex-shrink:0;border-top:1px solid rgba(212,168,67,.15);background:rgba(0,0,0,.3)}
+#tabs{display:flex;gap:3px;padding:4px 6px 3px;overflow-x:auto;align-items:stretch}
+.tb{padding:3px 7px;font-size:9px;font-weight:700;border-radius:5px;border:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.03);color:#5a4a30;white-space:nowrap;text-align:center;line-height:1.25}
+.tb.act{background:rgba(212,168,67,.2);border-color:#d4a843;color:#f5d98a}
+.tb.low{border-color:rgba(192,64,48,.3);color:#e08848}
+.tb.off{opacity:.65;color:#807055}
+#edit{padding:6px 10px 8px;border-top:1px solid rgba(212,168,67,.08);display:none}
+.er{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-end;margin-bottom:5px}
+.fd{display:flex;flex-direction:column;gap:1px}
+.fd>span{font-size:10px;color:#8a7a4a;font-weight:700}
+.ri{display:flex;align-items:center;gap:5px;padding:5px 6px;margin-bottom:3px;border-radius:6px;border:1px solid rgba(255,255,255,.02);transition:background .25s}
+.ri.flash{background:rgba(80,180,80,.12)!important}
+.bg{width:17px;height:17px;border-radius:50%;color:#fff;font-weight:800;font-size:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ub{padding:4px 9px;font-size:10px;font-weight:800;background:linear-gradient(135deg,#d4a843,#b88828);border:none;border-radius:5px;color:#2a1a08;flex-shrink:0}
+.ub.alt{background:linear-gradient(135deg,#6fa44a,#89c25f)}
+.tn{font-size:12px;font-weight:800;color:#f5d98a}
+.chk{display:flex;align-items:center;gap:2px;font-size:9px;color:#555;cursor:pointer;padding-bottom:3px}
+.chk input{accent-color:#a33;width:12px;height:12px}
+.seg{display:flex;gap:3px;overflow-x:auto}
+.sg{padding:2px 6px;font-size:8px;border-radius:5px;border:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.03);color:#8a7a4a;white-space:nowrap}
+.sg.act{background:rgba(212,168,67,.2);border-color:#d4a843;color:#f5d98a}
+.mini{padding:2px 6px;font-size:8px;border-radius:4px;border:1px solid rgba(212,168,67,.18);background:rgba(255,255,255,.03);color:#bda968}
+.note{padding:3px 6px;border-radius:4px;font-size:8px;line-height:1.45}
+.hr{height:1px;background:rgba(212,168,67,.08);margin:4px 0}
+.badge{font-size:7px;padding:0 3px;border-radius:3px;background:rgba(255,255,255,.05)}
+</style>
+</head>
+<body>
+<div id="hdr"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+    <span style="font-size:14px;font-weight:900">盛唐夜市 <span style="font-size:8px;color:#7e6d40">v3.2.3</span><span style="font-size:8px;color:#8a7a4a;margin-left:6px">by 信息时代 12-非洲哈基米</span></span>
+    <div style="display:flex;gap:4px;align-items:center">
+      <button class="mini" id="expBtn">导出</button>
+      <button class="mini" id="impBtn">导入</button>
+      <button class="mini" id="undoBtn">撤销</button>
+      <button class="mini" id="clrBtn">清空</button>
+    </div>
+  </div><div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap">
+    <span style="font-size:10px;color:#8a7a4a">收益<b style="color:#f5d98a">20560</b>万/时　客流<b style="color:#88b868">14160</b>人/时</span>
+    <span style="font-size:9px;color:#9cc36e">阶段：成熟期　终利+14%</span>
+  </div><div style="display:flex;gap:6px;align-items:center;margin-top:4px"><div style="display:flex;gap:1px;align-items:flex-end;flex:1;min-height:24px"><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:3px;border-radius:2px;background:#c04030" title="朱雀大街: 853.22"></div>
+      <span style="font-size:6px;color:#4a3828">朱雀</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:4.333366134282039px;border-radius:2px;background:#c04030" title="胡姬酒肆: 1272.18"></div>
+      <span style="font-size:6px;color:#4a3828">胡姬</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:4.760987056241012px;border-radius:2px;background:#c04030" title="皮影戏院: 1397.72"></div>
+      <span style="font-size:6px;color:#4a3828">皮影</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:5.800847778366513px;border-radius:2px;background:#c04030" title="华清池: 1703"></div>
+      <span style="font-size:6px;color:#4a3828">华清</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:7.003254863371433px;border-radius:2px;background:#c0a030" title="游艺馆: 2056"></div>
+      <span style="font-size:6px;color:#4a3828">游艺</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:11.056422678071305px;border-radius:2px;background:#5a8a3a" title="杏园: 3245.92"></div>
+      <span style="font-size:6px;color:#4a3828">杏园</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:18px;border-radius:2px;background:#5a8a3a" title="雁塔广场: 5284.4"></div>
+      <span style="font-size:6px;color:#4a3828">雁塔</span>
+    </div><div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:14px;height:16.171523730224816px;border-radius:2px;background:#5a8a3a" title="大慈恩寺: 4747.6"></div>
+      <span style="font-size:6px;color:#4a3828">大慈</span>
+    </div></div>
+    <div class="fd"><span>📜宣传册</span><input type="text" inputmode="decimal" id="broI" value="10" style="width:56px"></div>
+    <div class="fd"><span>上官婉儿%</span><input type="text" inputmode="decimal" id="wyI" value="14" style="width:64px"></div>
+  </div><div style="margin-top:4px"><div style="font-size:8px;color:#7f6e41;margin-bottom:2px">阶段判定 / 强制覆盖</div><div class="seg"><button class="sg act" data-phase="auto">自动</button><button class="sg" data-phase="snow">前期滚雪球</button><button class="sg" data-phase="dump">前期梭哈</button><button class="sg" data-phase="expand">铺楼期</button><button class="sg" data-phase="mature">成熟期</button></div></div><div style="margin-top:3px"><div style="font-size:8px;color:#7f6e41;margin-bottom:2px">宣传册节奏</div><div class="seg"><button class="sg act" data-bmode="auto">自动</button><button class="sg" data-bmode="single">1张1张</button><button class="sg" data-bmode="small">3-5张</button><button class="sg" data-bmode="large">8-10张</button><button class="sg" data-bmode="dump">全部梭哈</button></div></div><div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap"><div class="note" style="flex:1;min-width:150px;background:rgba(0,0,0,.18);border:1px solid rgba(212,168,67,.12);color:#a89864">大慈恩寺已开，回归常规ROI；优先补客流与低成本项，中间建筑不要断层。</div><div class="note" style="flex:1;min-width:170px;background:rgba(208,96,48,.06);border:1px solid rgba(208,96,48,.12);color:#f0b485">下一步：<b style="color:#ffd4a0">🏗 升级建筑</b> · 游艺馆 · 3100万</div><div class="note" style="flex:1;min-width:170px;background:rgba(80,180,80,.06);border:1px solid rgba(80,180,80,.12);color:#a0c880">宣传册：<b style="color:#8de88d">全部梭哈</b> → 模拟后收益均2584万/时</div></div><div style="display:flex;gap:2px;margin-top:3px;overflow-x:auto"><div style="padding:1px 4px;border-radius:3px;font-size:7px;white-space:nowrap;border:1px solid rgba(80,180,80,.2);background:rgba(80,180,80,.08);color:#8de88d">全部梭哈 → 均2584 / 余1200</div><div style="padding:1px 4px;border-radius:3px;font-size:7px;white-space:nowrap;border:1px solid rgba(255,255,255,.03);background:transparent;color:#7d6d43">8-10张 → 均2584 / 余413</div><div style="padding:1px 4px;border-radius:3px;font-size:7px;white-space:nowrap;border:1px solid rgba(255,255,255,.03);background:transparent;color:#7d6d43">3-5张 → 均2583 / 余942</div><div style="padding:1px 4px;border-radius:3px;font-size:7px;white-space:nowrap;border:1px solid rgba(255,255,255,.03);background:transparent;color:#7d6d43">1张1张 → 均2583 / 余155</div></div></div>
+<div id="rank"><div class="ri" style="border-color:#d0302022;background:rgba(208,48,32,.06)">
+      <div class="bg" style="background:#d03020">1</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">游艺馆</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+17</span><span>3100万</span>
+          <span style="color:#ff6040;font-weight:600">+13.2万/时</span>
+          <span style="color:#4a6a30">📜+1.6/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:100%;background:#d03020"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#ff5838">48</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b4-price">执行</button>
+    </div><div class="ri" style="border-color:#e0882822">
+      <div class="bg" style="background:#e08828">2</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">大慈恩寺</span>
+          
+          
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+48</span><span>8500万</span>
+          <span style="color:#9a8040;font-weight:600">+40.1万/时</span>
+          <span style="color:#4a6a30">📜+5.0/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:97.01107844423666%;background:#e08828"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">46</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b7-price">执行</button>
+    </div><div class="ri" style="border-color:#c0a03022">
+      <div class="bg" style="background:#c0a030">3</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">朱雀大街</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          <span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×1.2</span>
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+6</span><span>1300万</span>
+          <span style="color:#9a8040;font-weight:600">+4.4万/时</span>
+          <span style="color:#4a6a30">📜+0.6/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:87.38026238300934%;background:#c0a030"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">42</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b0-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">4</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">胡姬酒肆</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          <span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×1.2</span>
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+7</span><span>1900万</span>
+          <span style="color:#9a8040;font-weight:600">+6.3万/时</span>
+          <span style="color:#4a6a30">📜+0.8/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:83.15487716940545%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">40</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b1-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">5</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">皮影戏院</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          <span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×1.2</span>
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+8</span><span>2600万</span>
+          <span style="color:#9a8040;font-weight:600">+7.1万/时</span>
+          <span style="color:#4a6a30">📜+0.9/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:67.28010139774693%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">32</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b2-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">6</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">华清池</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          <span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×1.2</span>
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+12</span><span>3600万</span>
+          <span style="color:#9a8040;font-weight:600">+10.0万/时</span>
+          <span style="color:#4a6a30">📜+1.2/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:66.8284777437015%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">32</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b3-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">7</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">雁塔广场</span>
+          
+          
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+39</span><span>13000万</span>
+          <span style="color:#9a8040;font-weight:600">+36.2万/时</span>
+          <span style="color:#4a6a30">📜+4.5/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:57.26350245797895%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">27</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b6-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">8</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">🏗 升级建筑</span>
+          <span style="font-size:10px;color:#8a7a4a">杏园</span>
+          
+          
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>单价+26</span><span>7900万</span>
+          <span style="color:#9a8040;font-weight:600">+21.9万/时</span>
+          <span style="color:#4a6a30">📜+2.7/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:56.999497303105215%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">27</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b5-price">执行</button>
+    </div><div class="ri" style="border-color:rgba(255,255,255,.02)">
+      <div class="bg" style="background:#3a3028">9</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">📣 加强宣传</span>
+          <span style="font-size:10px;color:#8a7a4a">朱雀大街</span>
+          <span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>
+          <span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×1.2</span>
+          
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>客流+120</span><span>41000万</span>
+          <span style="color:#9a8040;font-weight:600">+56.9万/时</span>
+          <span style="color:#4a6a30">📜+7.1/本</span>
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">按当前阶段权重</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:40.63537405128565%;background:#3a3028"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:#f5d98a">19</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub" data-act="b0-flow">执行</button>
+    </div></div>
+<div id="bot">
+  <div id="tabs"><button class="tb low" data-id="b0">
+      <div style="font-size:10px;font-weight:800">朱雀大街</div>
+      <div style="font-size:8px;opacity:.66">853.22万/时</div></button><button class="tb act low" data-id="b1">
+      <div style="font-size:10px;font-weight:800">胡姬酒肆</div>
+      <div style="font-size:8px;opacity:.66">1272.18万/时</div></button><button class="tb low" data-id="b2">
+      <div style="font-size:10px;font-weight:800">皮影戏院</div>
+      <div style="font-size:8px;opacity:.66">1397.72万/时</div></button><button class="tb low" data-id="b3">
+      <div style="font-size:10px;font-weight:800">华清池</div>
+      <div style="font-size:8px;opacity:.66">1703万/时</div></button><button class="tb" data-id="b4">
+      <div style="font-size:10px;font-weight:800">游艺馆</div>
+      <div style="font-size:8px;opacity:.66">2056万/时</div></button><button class="tb" data-id="b5">
+      <div style="font-size:10px;font-weight:800">杏园</div>
+      <div style="font-size:8px;opacity:.66">3245.92万/时</div></button><button class="tb" data-id="b6">
+      <div style="font-size:10px;font-weight:800">雁塔广场</div>
+      <div style="font-size:8px;opacity:.66">5284.4万/时</div></button><button class="tb" data-id="b7">
+      <div style="font-size:10px;font-weight:800">大慈恩寺</div>
+      <div style="font-size:8px;opacity:.66">4747.6万/时</div></button></div>
+  <div id="edit" style="display: block;">
+    <div class="er">
+      <div class="fd"><span>名称</span><input type="text" id="enm" value="胡姬酒肆" style="width:84px"></div>
+      <div class="fd"><span>单价</span><input type="text" inputmode="decimal" data-key="price" value="1403" style="width:60px"></div>
+      <div class="fd"><span>客流/时</span><input type="text" inputmode="decimal" data-key="flow" value="2040" style="width:64px"></div>
+      <div class="fd"><span>利润万/时</span><input type="text" inputmode="decimal" data-key="profit" value="1272.18" style="width:72px"></div>
+      <div class="fd"><span>店长%</span><input type="text" inputmode="decimal" data-key="mgr" value="10" style="width:44px"></div>
+      <div class="fd"><span>部件%</span><input type="text" inputmode="decimal" data-key="comp" value="80" style="width:44px"></div>
+      <div class="fd"><span>培训%(已校正)</span><span id="empV" style="font-size:12px;font-weight:700;color:#6a5a38;padding:5px 0">200</span></div>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:1"><span style="font-size:11px;line-height:28px">🏗</span><div class="fd"><span>单价+</span><input type="text" inputmode="decimal" data-key="upPD" value="7" style="width:48px"></div><div class="fd"><span>费用万</span><input type="text" inputmode="decimal" data-key="upPC" value="1900" style="width:58px"></div><label class="chk" style="color:#555"><input type="checkbox" data-mkey="mxP"> 满</label></div>
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:0.3"><span style="font-size:11px;line-height:28px">📣</span><div class="fd"><span>客流+</span><input type="text" inputmode="decimal" data-key="upFD" value="120" style="width:48px"></div><div class="fd"><span>费用万</span><input type="text" inputmode="decimal" data-key="upFC" value="7100" style="width:58px"></div><label class="chk" style="color:#a33"><input type="checkbox" data-mkey="mxF" checked=""> 满</label></div>
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:0.3"><span style="font-size:11px;line-height:28px">👥</span><div class="fd"><span>利润%</span><input type="text" inputmode="decimal" data-key="upED" value="20" style="width:48px"></div><div class="fd"><span>费用万</span><input type="text" inputmode="decimal" data-key="upEC" value="4300" style="width:58px"></div><label class="chk" style="color:#a33"><input type="checkbox" data-mkey="mxE" checked=""> 满</label></div>
+    </div>
+
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px">
+      <button id="cpyBtn" class="mini">复制上一栋模板</button>
+      <button id="delBtn" style="padding:3px 8px;font-size:9px;background:transparent;border:1px solid #2a2018;border-radius:4px;color:#5a4a30;margin-left:auto">删除</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SK="tang-nm-v323";
+const UNDO_SK="tang-nm-v323-undo";
+const LEGACY_KEYS=["tang-nm-v20","tang-nm-v10"];
+const NAMES=["朱雀大街","胡姬酒肆","皮影戏院","华清池","游艺馆","杏园","雁塔广场","大慈恩寺"];
+const PHASE_TEXT={auto:"自动",snow:"前期滚雪球",dump:"前期梭哈",expand:"铺楼期",mature:"成熟期"};
+const BRO_TEXT={auto:"自动",single:"1张1张",small:"3-5张",large:"8-10张",dump:"全部梭哈"};
+const ACTION_TEXT={price:"升级建筑",flow:"加强宣传",emp:"培训员工",unlock:"开新楼"};
+const ACTION_ICON={price:"🏗",flow:"📣",emp:"👥",unlock:"🏠"};
+
+function makeBuilding(i,on){
+  return {
+    id:"b"+i,
+    name:NAMES[i]||("建筑"+(i+1)),
+    on:!!on,
+    price:0,flow:0,profit:0,
+    mgr:on?0:10,comp:0,
+    upPD:0,upPC:0,upFD:0,upFC:0,upED:0,upEC:0,
+    mxP:false,mxF:false,mxE:false,
+    level:0,nextFU:0,nextEU:0
+  };
+}
+function normNum(v){ const n=parseFloat(v); return isNaN(n)?0:n; }
+function clone(v){ return JSON.parse(JSON.stringify(v)); }
+function round(v,d=1){ return +Number(v||0).toFixed(d); }
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+function actionKey(a){ return a.bid+"-"+a.k; }
+
+let S={
+  bs:[makeBuilding(0,true),makeBuilding(1,true)],
+  broN:0,
+  finalBonus:0,
+  phaseMode:"auto",
+  broMode:"auto",
+  rankHours:72,
+  ed:null,
+  flash:null
+};
+let _ni=20;
+let UNDO=null;
+let EDIT_SNAPSHOT=null;
+
+function normalizeBuilding(b,i){
+  const d=makeBuilding(i,false);
+  const on = typeof b.on==="boolean" ? b.on : normNum(b.profit)>0;
+  return {
+    ...d,
+    ...b,
+    id:b.id||d.id,
+    name:(b.name||d.name),
+    on,
+    price:normNum(b.price),
+    flow:normNum(b.flow),
+    profit:normNum(b.profit),
+    mgr:normNum(b.mgr),
+    comp:normNum(b.comp),
+    upPD:normNum(b.upPD),
+    upPC:normNum(b.upPC),
+    upFD:normNum(b.upFD),
+    upFC:normNum(b.upFC),
+    upED:normNum(b.upED),
+    upEC:normNum(b.upEC),
+    mxP:!!b.mxP,mxF:!!b.mxF,mxE:!!b.mxE,
+    level:normNum(b.level),nextFU:normNum(b.nextFU),nextEU:normNum(b.nextEU)
+  };
+}
+function load(){
+  try{
+    let d=JSON.parse(localStorage.getItem(SK));
+    if(!d){
+      for(const k of LEGACY_KEYS){
+        const old=JSON.parse(localStorage.getItem(k));
+        if(old){ d=old; break; }
+      }
+    }
+    if(d?.bs?.length){
+      S.bs=d.bs.slice(0,NAMES.length).map((b,i)=>normalizeBuilding(b,i));
+      S.bs.forEach((b,i)=>{ if(!b.name || /^建筑\d+$/.test(b.name) || b.name==="友谊关" || b.name==="太白楼") b.name=NAMES[i]||b.name; });
+      S.broN=normNum(d.broN);
+      S.finalBonus=normNum(d.finalBonus||d.wyBonus);
+      S.phaseMode=d.phaseMode||d.mode||"auto";
+      S.broMode=d.broMode||"auto";
+      S.rankHours=normNum(d.rankHours)||72;
+      S.ed=d.ed||null;
+    }
+    const u=JSON.parse(localStorage.getItem(UNDO_SK));
+    if(u?.state?.bs?.length) UNDO=u;
+    else if(u?.bs?.length) UNDO={state:u,meta:{}};
+  }catch(e){}
+  while(S.bs.length<NAMES.length) S.bs.push(makeBuilding(S.bs.length,S.bs.length<2));
+  if(S.bs.length>NAMES.length) S.bs=S.bs.slice(0,NAMES.length);
+  _ni=Math.max(20,S.bs.length+10);
+}
+function saveUndo(){
+  try{
+    if(UNDO) localStorage.setItem(UNDO_SK,JSON.stringify(UNDO));
+    else localStorage.removeItem(UNDO_SK);
+  }catch(e){}
+}
+function save(){
+  try{
+    localStorage.setItem(SK,JSON.stringify({
+      bs:S.bs,broN:S.broN,finalBonus:S.finalBonus,phaseMode:S.phaseMode,broMode:S.broMode,rankHours:S.rankHours,ed:S.ed
+    }));
+    saveUndo();
+  }catch(e){}
+}
+function snapshotState(){
+  return clone({bs:S.bs,broN:S.broN,finalBonus:S.finalBonus,phaseMode:S.phaseMode,broMode:S.broMode,rankHours:S.rankHours,ed:S.ed});
+}
+function setUndo(meta={}){
+  UNDO={state:snapshotState(),meta:clone(meta||{})};
+  saveUndo();
+}
+function applySnapshot(snap){
+  if(!snap?.bs?.length) return;
+  S.bs=snap.bs.slice(0,NAMES.length).map((b,i)=>normalizeBuilding(b,i));
+  while(S.bs.length<NAMES.length) S.bs.push(makeBuilding(S.bs.length,S.bs.length<2));
+  S.broN=normNum(snap.broN);
+  S.finalBonus=normNum(snap.finalBonus||snap.wyBonus);
+  S.phaseMode=snap.phaseMode||"auto";
+  S.broMode=snap.broMode||"auto";
+  S.rankHours=normNum(snap.rankHours)||72;
+  S.ed=snap.ed||null;
+  S.flash=null;
+  EDIT_SNAPSHOT=null;
+  syncOpenState();
+}
+function undoLast(){
+  if(!UNDO?.state?.bs?.length){ alert("暂无可撤销的上一步"); return; }
+  const cur={state:snapshotState(),meta:{focusId:S.ed||null}};
+  const prev=clone(UNDO);
+  UNDO=cur;
+  applySnapshot(prev.state);
+  if(prev.meta?.focusId) S.ed=prev.meta.focusId;
+  save();
+  rerender();
+}
+function markEditStart(){
+  if(!EDIT_SNAPSHOT){
+    EDIT_SNAPSHOT=snapshotState();
+  }
+}
+function commitEditUndo(focusId=null){
+  if(EDIT_SNAPSHOT){
+    UNDO={state:EDIT_SNAPSHOT,meta:{focusId:focusId||S.ed||null}};
+    EDIT_SNAPSHOT=null;
+    saveUndo();
+  }
+}
+
+
+function syncOpenState(){
+  let seenGap=false;
+  S.bs.forEach((b,i)=>{
+    if(i<2){ b.on=true; return; }
+    if(seenGap){ b.on=false; return; }
+    if(b.on){ return; }
+    const hasReal=normNum(b.profit)>0 || (normNum(b.price)>0 && normNum(b.flow)>0);
+    if(hasReal) b.on=true;
+    else seenGap=true;
+  });
+}
+
+function active(bs=S.bs){ return bs.filter(b=>b.on); }
+function usableActive(bs=S.bs){ return bs.filter(b=>b.on && b.price>0 && b.flow>0 && b.profit>0); }
+function totalProfit(bs=S.bs){ return active(bs).reduce((s,b)=>s+normNum(b.profit),0); }
+function avgProfit(bs=S.bs){
+  const ac=active(bs);
+  return ac.length?totalProfit(bs)/ac.length:0;
+}
+function avgPositiveProfit(bs=S.bs){
+  const ac=usableActive(bs);
+  return ac.length?ac.reduce((s,b)=>s+b.profit,0)/ac.length:0;
+}
+function finalMul(){ return 1+normNum(S.finalBonus)/100; }
+function baseProfit(b){ return b.price*b.flow/10000; }
+function empP(b){
+  const a=baseProfit(b);
+  const fm=finalMul();
+  if(a<=0||b.profit<=0) return 0;
+  return round((((b.profit/(a*fm))-1)*100-(b.mgr||0)-(b.comp||0)),1);
+}
+function getSpread(bs=S.bs){
+  const ac=active(bs);
+  if(!ac.length) return 0;
+  const avg=avgProfit(bs);
+  const ps=ac.map(b=>normNum(b.profit));
+  return avg>0?(Math.max(...ps)-Math.min(...ps))/avg:0;
+}
+function getTailRatio(bs=S.bs){
+  const ac=active(bs);
+  if(ac.length<2) return 1;
+  const last=normNum(ac[ac.length-1].profit);
+  const prev=normNum(ac[ac.length-2].profit);
+  if(prev<=0) return 0;
+  return last/prev;
+}
+function getRawCheapestUpgrade(bs=S.bs){
+  const ac=usableActive(bs);
+  let m=Infinity;
+  ac.forEach(b=>{
+    if(!b.mxP && b.upPC>0 && b.upPD>0) m=Math.min(m,b.upPC);
+    if(!b.mxF && b.upFC>0 && b.upFD>0) m=Math.min(m,b.upFC);
+    if(!b.mxE && b.upEC>0 && b.upED>0) m=Math.min(m,b.upEC);
+  });
+  return isFinite(m)?m:0;
+}
+function getNextBuilding(bs=S.bs){ return bs.find(b=>!b.on); }
+function estimateNextBudget(next, cheapest){
+  if(!next) return 0;
+  const costs=[next.upPC,next.upFC,next.upEC].filter(v=>normNum(v)>0).sort((a,b)=>a-b);
+  if(costs.length>=2) return round(costs[0]+costs[1],0);
+  if(costs.length===1) return round(costs[0]+Math.max(costs[0],cheapest||0),0);
+  return round(Math.max((cheapest||0)*2, 1),0);
+}
+function getReadiness(bs=S.bs){
+  const openN=active(bs).length;
+  const total=totalProfit(bs);
+  const avg=avgProfit(bs);
+  const next=getNextBuilding(bs);
+  const cheapest=getRawCheapestUpgrade(bs);
+  const ratio=getTailRatio(bs);
+  const afterAvg=(openN&&next)?total/(openN+1):avg;
+  const dilLoss=Math.max(0,avg-afterAvg);
+  const dilRel=avg>0?dilLoss/avg:0;
+  const readyForDump=openN===2 && S.broN>=50 && S.broN<=80 && ratio>=0.88;
+  const readyForExpand=openN===2 && (!!next) && ratio>=0.90 && S.broN<=0;
+  return {openN,total,avg,next,cheapest,ratio,afterAvg,dilLoss,dilRel,readyForDump,readyForExpand};
+}
+function getPhase(bs=S.bs){
+  const rd=getReadiness(bs);
+  let key=S.phaseMode;
+  if(key==="auto"){
+    if(rd.openN>=NAMES.length) key="mature";
+    else if(rd.openN>=3) key="expand";
+    else if(rd.readyForDump) key="dump";
+    else key="snow";
+  }
+  const map={
+    snow:{label:"前期滚雪球",pulseBro:1,note:"只养前两楼，宣传册逐本用；建筑优先，客流次之，员工更后。"},
+    dump:{label:"前期梭哈",pulseBro:999,note:"已进入梭哈窗口：把剩余宣传册吃完，再视资金与断层情况考虑开第三楼。"},
+    expand:{label:"铺楼期",pulseBro:4,note:"持续开到大慈恩寺前；后排建筑更强，但中间别断层，开楼前先储备资金。"},
+    mature:{label:"成熟期",pulseBro:9,note:"大慈恩寺已开，回归常规ROI；优先补客流与低成本项，中间建筑不要断层。"}
+  };
+  const allowUnlock = key==="expand" || rd.readyForExpand || (S.phaseMode==="expand" && !!rd.next);
+  return {
+    key,
+    ...map[key],
+    ...rd,
+    needBalance: getSpread(bs)>0.75 && rd.openN>=3,
+    spread:getSpread(bs),
+    avgPos:avgPositiveProfit(bs),
+    allowUnlock
+  };
+}
+function kindWeight(phaseKey,k){
+  const m={
+    snow:{price:1.22,flow:1.12,emp:0.86,unlock:0.08},
+    dump:{price:0.86,flow:0.82,emp:0.74,unlock:1.12},
+    expand:{price:1.02,flow:1.12,emp:0.94,unlock:1.16},
+    mature:{price:0.98,flow:1.12,emp:1.00,unlock:0.08}
+  };
+  return (m[phaseKey]&&m[phaseKey][k])||1;
+}
+function calcGain(b,k){
+  if(k==="price"){
+    if(b.mxP||b.price<=0||b.upPD<=0||b.upPC<=0||b.profit<=0) return null;
+    return {g:(b.upPD/b.price)*b.profit,c:b.upPC,d:"单价+"+b.upPD};
+  }
+  if(k==="flow"){
+    if(b.mxF||b.flow<=0||b.upFD<=0||b.upFC<=0||b.profit<=0) return null;
+    return {g:(b.upFD/b.flow)*b.profit,c:b.upFC,d:"客流+"+b.upFD};
+  }
+  if(k==="emp"){
+    if(b.mxE||b.upED<=0||b.upEC<=0) return null;
+    return {g:baseProfit(b)*(b.upED/100)*finalMul(),c:b.upEC,d:"+"+b.upED+"%"};
+  }
+  return null;
+}
+function buildActions(bs=S.bs){
+  const phase=getPhase(bs);
+  const ac=usableActive(bs);
+  const avg=Math.max(phase.avg,phase.avgPos);
+  const out=[];
+  ac.forEach(b=>{
+    ["price","flow","emp"].forEach(k=>{
+      const v=calcGain(b,k);
+      if(!v||v.g<=0||v.c<=0) return;
+      const gap=Math.max(0,avg-b.profit)/(avg||1);
+      let bw=1+gap*(phase.key==="snow"?0.80:phase.key==="expand"?0.35:0.20);
+      let gw=kindWeight(phase.key,k);
+      if(k==="flow"&&v.c<=Math.max(1,b.price*10)) gw*=1.12;
+      if(k==="emp"&&v.c<=Math.max(1,b.price*3)) gw*=1.08;
+      if(phase.needBalance && b.profit<avg*0.8) bw*=1.10;
+      // Unlock proximity bonus: upgrading building price to reach next flow/emp unlock
+      let unlockHint="";
+      if(k==="price" && b.level>0){
+        const toFU=b.nextFU>b.level?(b.nextFU-b.level):999;
+        const toEU=b.nextEU>b.level?(b.nextEU-b.level):999;
+        const toMin=Math.min(toFU,toEU);
+        const unlockType=toFU<=toEU?"客流":"培训";
+        if(toMin<=3){ gw*=2.0; unlockHint=`差${toMin}级解锁${unlockType}`; }
+        else if(toMin<=6){ gw*=1.5; unlockHint=`差${toMin}级解锁${unlockType}`; }
+        else if(toMin<=10){ gw*=1.2; unlockHint=`差${toMin}级解锁${unlockType}`; }
+      }
+      // Flow contribution indicator
+      const flowDelta=(k==="flow")?normNum(b.upFD):0;
+      const score=(v.g/v.c)*bw*gw;
+      let why=unlockHint||(phase.key==="snow"?"前期滚雪球：优先两楼同步拉高":phase.key==="expand"?"铺楼期：后排更强但别断层":"按当前阶段权重");
+      out.push({
+        bid:b.id,bN:b.name,bP:b.profit,k,t:ACTION_TEXT[k],ic:ACTION_ICON[k],d:v.d,c:v.c,g:v.g,
+        score,avgD:v.g/Math.max(1,phase.openN),low:b.profit<avg*.85,bw,phase:phase.key,type:"upgrade",
+        why,flowDelta
+      });
+    });
+  });
+
+  const next=phase.next;
+  if(next && phase.key!=="mature"){
+    const manualExpand=S.phaseMode==="expand";
+    const allow = phase.allowUnlock || manualExpand;
+    if(allow){
+      const ratioBase=phase.openN<=2?0.90:0.85;
+      const ratioFactor=clamp(phase.ratio/ratioBase,0,1.25);
+      const dilPenalty=1+phase.dilRel*1.45;
+      const virtualGain=Math.max(1,phase.avg||phase.avgPos||1)*(0.55+0.45*ratioFactor);
+      let gw=kindWeight(phase.key,"unlock");
+      let bw=1;
+      let why=`开楼后宣传册均值约降${round(phase.dilRel*100,0)}%，开楼前先储备资金`;
+      if(phase.openN===2 && !phase.readyForExpand && manualExpand){
+        bw*=0.80;
+        why=`手动强制铺楼：均值约降${round(phase.dilRel*100,0)}%，建议先储备资金再开`;
+      }else if(phase.openN===2 && phase.readyForExpand){
+        bw*=1.12;
+        why=`已接近铺楼条件：尾楼≈前楼${round(phase.ratio*100,0)}%，宣传册已基本清空`;
+      }else if(phase.key==="expand"){
+        if(phase.ratio>=0.85) bw*=1.06;
+        why=`铺楼期：后排建筑更强，但中间不能太低；开楼前先储备资金`;
+      }
+      const denom=Math.max(1,phase.cheapest||1);
+      const score=(virtualGain/denom)*bw*gw/dilPenalty;
+      out.push({
+        bid:next.id,bN:next.name,bP:0,k:"unlock",t:"开新楼",ic:"🏠",d:`开楼后均值-${round(phase.dilRel*100,0)}%`,c:0,g:virtualGain,
+        score,avgD:phase.afterAvg,low:false,bw,phase:phase.key,type:"unlock",why,flowDelta:0
+      });
+    }
+  }
+  out.sort((a,b)=>b.score-a.score||b.avgD-a.avgD||a.c-b.c);
+  return out;
+}
+function doUpgrade(b,k){
+  const n={...b};
+  if(k==="price" && n.price>0 && n.upPD>0){
+    const o=n.price; n.price=o+n.upPD; n.profit=round(n.profit*n.price/o,2);
+    if(n.level>0) n.level++;
+  }else if(k==="flow" && n.flow>0 && n.upFD>0){
+    const o=n.flow; n.flow=o+n.upFD; n.profit=round(n.profit*n.flow/o,2);
+  }else if(k==="emp" && n.upED>0){
+    const base=baseProfit(n),oe=empP(n),t=(n.mgr||0)+(n.comp||0)+oe+n.upED;
+    n.profit=round(base*(1+t/100)*finalMul(),2);
+  }
+  return n;
+}
+function applyAction(bs,action){
+  return bs.map(b=>{
+    if(b.id!==action.bid) return {...b};
+    if(action.k==="unlock") return {...b,on:true};
+    return doUpgrade({...b},action.k);
+  });
+}
+function chooseBroStrategy(phase){
+  if(S.broMode!=="auto") return S.broMode;
+  if(phase.key==="snow") return "single";
+  if(phase.key==="dump") return "dump";
+  if(phase.key==="expand") return "small";
+  return "large";
+}
+function simBrochure(bs,n,strat){
+  const startPhase=getPhase(bs);
+  const nowFp=round(totalProfit(bs),0), nowAvg=round(avgProfit(bs),0);
+  if(n<=0 || !active(bs).length) return {key:strat,label:BRO_TEXT[strat],earned:0,ups:0,fp:nowFp,favg:nowAvg,used:0,note:"暂无宣传册"};
+  let state=clone(bs), cash=0, books=n, used=0, ops=0;
+  const buyWave=(limit)=>{
+    for(let i=0;i<limit;i++){
+      const acts=buildActions(state).filter(a=>a.c<=cash);
+      if(!acts.length) break;
+      const pick=acts[0];
+      state=applyAction(state,pick);
+      cash-=pick.c;
+      ops++;
+    }
+  };
+  if(strat==="dump"){
+    cash+=n*avgProfit(state);
+    used=n;
+    books=0;
+    buyWave(24);
+  }else{
+    const batch=strat==="single"?1:(strat==="small"?4:9);
+    const limit=strat==="single"?1:(strat==="small"?3:5);
+    while(books>0){
+      const bt=Math.min(batch,books);
+      cash+=bt*avgProfit(state);
+      used+=bt;
+      books-=bt;
+      buyWave(limit);
+    }
+  }
+  // Calculate total flow from brochures: each brochure = 1 hour of random building's customer flow
+  const avgFlow=active(state).length?active(state).reduce((s,b)=>s+normNum(b.flow),0)/active(state).length:0;
+  const broFlow=round(used*avgFlow,0); // total customer flow contributed by brochures
+  return {
+    key:strat,label:BRO_TEXT[strat],earned:round(cash,0),ups:ops,fp:round(totalProfit(state),0),favg:round(avgProfit(state),0),used,
+    broFlow,
+    note:strat==="single"?"每张后都重算":strat==="small"?"按3-5张节奏模拟":strat==="large"?"按8-10张节奏模拟":"一次性用完"
+  };
+}
+function getSims(bs=S.bs){
+  const n=normNum(S.broN);
+  if(n<=0 || !active(bs).length) return [];
+  const phase=getPhase(bs);
+  const keys=[chooseBroStrategy(phase),"single","small","large","dump"].filter((v,i,a)=>a.indexOf(v)===i);
+  const list=keys.map(k=>simBrochure(bs,n,k));
+  list.sort((a,b)=>b.favg-a.favg||b.fp-a.fp||b.earned-a.earned);
+  return list;
+}
+function pickBestSim(bs=S.bs){
+  const sims=getSims(bs);
+  if(!sims.length) return null;
+  if(S.broMode==="auto") return sims[0];
+  return sims.find(s=>s.key===S.broMode) || sims[0];
+}
+function topAction(bs=S.bs){
+  const a=buildActions(bs);
+  return a.length?a[0]:null;
+}
+
+function copyPrevTemplate(curId){
+  const idx=S.bs.findIndex(b=>b.id===curId);
+  if(idx<=0) return false;
+  const prev=S.bs[idx-1], cur=S.bs[idx];
+  ["upPD","upPC","upFD","upFC","upED","upEC","mgr","comp"].forEach(k=>{ if(!cur[k]) cur[k]=prev[k]; });
+  if(!cur.price && prev.price) cur.price=prev.price;
+  if(!cur.flow && prev.flow) cur.flow=prev.flow;
+  save();
+  return true;
+}
+function exportData(){
+  const txt=JSON.stringify({bs:S.bs,broN:S.broN,finalBonus:S.finalBonus,phaseMode:S.phaseMode,broMode:S.broMode,rankHours:S.rankHours},null,2);
+  if(navigator.clipboard?.writeText){
+    navigator.clipboard.writeText(txt).then(()=>alert("已复制存档 JSON")).catch(()=>prompt("复制下面内容",txt));
+  }else prompt("复制下面内容",txt);
+}
+function importData(){
+  const txt=prompt("粘贴之前导出的 JSON");
+  if(!txt) return;
+  try{
+    const d=JSON.parse(txt);
+    if(!d?.bs?.length) throw new Error();
+    setUndo({focusId:S.ed||null, type:"import"});
+    S.bs=d.bs.slice(0,NAMES.length).map((b,i)=>normalizeBuilding(b,i));
+    S.broN=normNum(d.broN);
+    S.finalBonus=normNum(d.finalBonus||d.wyBonus);
+    S.phaseMode=d.phaseMode||"auto";
+    S.broMode=d.broMode||"auto";
+    S.rankHours=normNum(d.rankHours)||72;
+    S.ed=null;
+    save();
+    rerender();
+  }catch(e){ alert("导入失败：JSON 格式不对"); }
+}
+function resetData(){
+  setUndo({focusId:S.ed||null, type:"reset"});
+  S={bs:NAMES.map((_,i)=>makeBuilding(i,i<2)),broN:0,finalBonus:0,phaseMode:"auto",broMode:"auto",rankHours:72,ed:null,flash:null};
+  save();
+  rerender();
+}
+
+function rHdr(){
+  const el=document.getElementById("hdr");
+  const ac=active(S.bs), openN=ac.length;
+  const tot=totalProfit(S.bs), avg=avgProfit(S.bs), maxP=ac.length?Math.max(...ac.map(b=>normNum(b.profit))):0;
+  const totFlow=ac.reduce((s,b)=>s+normNum(b.flow),0);
+  const phase=getPhase(S.bs);
+  const best=topAction(S.bs);
+  const sims=getSims(S.bs);
+  const chosen=pickBestSim(S.bs);
+
+  let subNote=phase.note;
+  if(S.phaseMode==="auto" && phase.readyForExpand && openN===2) subNote="前两楼已基本满足铺楼条件：宣传册已清空，且尾楼已接近前楼。";
+  if(S.phaseMode==="auto" && phase.key==="snow" && phase.readyForDump) subNote="已到梭哈窗口：现在更适合把剩余宣传册吃完，再准备开第三楼。";
+  if(S.phaseMode==="auto" && phase.key==="snow" && !phase.readyForDump && openN===2) subNote=`尾楼≈前楼${round(phase.ratio*100,0)}%，当前仍以两楼滚雪球更稳。`;
+
+  const maxF=ac.length?Math.max(...ac.map(b=>normNum(b.flow))):0;
+  const avgF=ac.length?totFlow/ac.length:0;
+  const rankFlow=round(totFlow*normNum(S.rankHours),0);
+  // Ranking countdown: 15-day cycle from 2026-04-13
+  const now=new Date(), epoch=new Date(2026,3,13);
+  let daysSince=Math.floor((now-epoch)/(86400000));
+  if(daysSince<0) daysSince=0;
+  const daysToNext=15-(daysSince%15);
+  const rankWarn=daysToNext<=3;
+
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+    <span style="font-size:14px;font-weight:900">盛唐夜市 <span style="font-size:8px;color:#7e6d40">v4.1</span></span>
+    <div style="display:flex;gap:4px;align-items:center">
+      ${rankWarn?`<span class="mini" style="color:#ff6040;border-color:#ff604066">冲榜${daysToNext}天后</span>`:""}
+      <button class="mini" id="expBtn">导出</button>
+      <button class="mini" id="impBtn">导入</button>
+      <button class="mini" id="undoBtn">撤销</button>
+      <button class="mini" id="clrBtn">清空</button>
+    </div>
+  </div>`;
+
+  html+=`<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap">
+    <span style="font-size:10px;color:#8a7a4a">收益<b style="color:#f5d98a">${tot.toFixed(0)}</b>万/时　客流<b style="color:#88b868">${totFlow}</b>人/时　冲榜<b style="color:#d4a843">${rankFlow>=10000?(rankFlow/10000).toFixed(1)+"万":rankFlow}</b>人/${S.rankHours}h</span>
+    <span style="font-size:9px;color:#9cc36e">阶段：${phase.label}　终利+${normNum(S.finalBonus)}%</span>
+  </div>`;
+
+  // Dual bar charts: profit (left) + flow (right)
+  html+=`<div style="display:flex;gap:6px;align-items:center;margin-top:4px">`;
+  // Profit bars
+  html+=`<div style="display:flex;gap:1px;align-items:flex-end;flex:1;min-height:24px" title="利润对比">`;
+  ac.forEach(b=>{
+    const ht=maxP>0?Math.max(3,(normNum(b.profit)/maxP)*18):3;
+    const col=normNum(b.profit)<avg*.7?"#c04030":normNum(b.profit)>=avg?"#5a8a3a":"#c0a030";
+    html+=`<div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:12px;height:${ht}px;border-radius:2px;background:${col}" title="💰${b.name}: ${b.profit}万/时"></div>
+      <span style="font-size:5px;color:#4a3828">${(b.name||"?").slice(0,2)}</span>
+    </div>`;
+  });
+  html+=`</div>`;
+  // Flow bars
+  html+=`<div style="display:flex;gap:1px;align-items:flex-end;min-height:24px" title="客流对比">`;
+  ac.forEach(b=>{
+    const ht=maxF>0?Math.max(3,(normNum(b.flow)/maxF)*18):3;
+    const col=normNum(b.flow)<avgF*.8?"#c04030":normNum(b.flow)>=avgF?"#4a88c8":"#88a8c0";
+    html+=`<div style="display:flex;flex-direction:column;align-items:center">
+      <div style="width:12px;height:${ht}px;border-radius:2px;background:${col}" title="👥${b.name}: ${b.flow}人/时"></div>
+      <span style="font-size:5px;color:#4a3828">${normNum(b.flow)}</span>
+    </div>`;
+  });
+  html+=`</div>
+    <div class="fd"><span>📜宣传册</span><input type="text" inputMode="decimal" id="broI" value="${S.broN}" style="width:56px"></div>
+    <div class="fd"><span>上官婉儿%</span><input type="text" inputMode="decimal" id="wyI" value="${S.finalBonus}" style="width:54px"></div>
+    <div class="fd"><span>冲榜h</span><input type="text" inputMode="decimal" id="rkI" value="${S.rankHours}" style="width:36px"></div>
+  </div>`;
+
+  html+=`<div style="margin-top:4px"><div style="font-size:8px;color:#7f6e41;margin-bottom:2px">阶段判定 / 强制覆盖</div><div class="seg">`;
+  ["auto","snow","dump","expand","mature"].forEach(k=>{
+    html+=`<button class="sg${S.phaseMode===k?" act":""}" data-phase="${k}">${PHASE_TEXT[k]}</button>`;
+  });
+  html+=`</div></div>`;
+
+  html+=`<div style="margin-top:3px"><div style="font-size:8px;color:#7f6e41;margin-bottom:2px">宣传册节奏</div><div class="seg">`;
+  ["auto","single","small","large","dump"].forEach(k=>{
+    html+=`<button class="sg${S.broMode===k?" act":""}" data-bmode="${k}">${BRO_TEXT[k]}</button>`;
+  });
+  html+=`</div></div>`;
+
+  html+=`<div style="display:flex;gap:4px;margin-top:4px;flex-wrap:wrap">`;
+  html+=`<div class="note" style="flex:1;min-width:150px;background:rgba(0,0,0,.18);border:1px solid rgba(212,168,67,.12);color:#a89864">${subNote}</div>`;
+  if(best){
+    html+=`<div class="note" style="flex:1;min-width:170px;background:${best.k==="unlock"?"rgba(80,180,80,.06)":"rgba(208,96,48,.06)"};border:1px solid ${best.k==="unlock"?"rgba(80,180,80,.12)":"rgba(208,96,48,.12)"};color:${best.k==="unlock"?"#a0c880":"#f0b485"}">下一步：<b style="color:${best.k==="unlock"?"#8de88d":"#ffd4a0"}">${best.ic} ${best.t}</b> · ${best.bN} · ${best.c}万</div>`;
+  }
+  if(chosen){
+    html+=`<div class="note" style="flex:1;min-width:170px;background:rgba(80,180,80,.06);border:1px solid rgba(80,180,80,.12);color:#a0c880">宣传册：<b style="color:#8de88d">${chosen.label}</b> → 均${chosen.favg}万/时${chosen.broFlow?` 👥+${chosen.broFlow}人`:""}</div>`;
+  }
+  html+=`</div>`;
+
+  if(phase.next && phase.key!=="mature"){
+    html+=`<div style="display:flex;gap:3px;margin-top:3px;flex-wrap:wrap">`;
+    html+=`<span class="mini">下一楼：${phase.next.name}</span>`;
+    html+=`<span class="mini">尾楼≈前楼 ${round(phase.ratio*100,0)}%</span>`;
+    html+=`<span class="mini">开楼后均值 -${round(phase.dilRel*100,0)}%</span>`;
+    html+=`<span class="mini">开楼前先储备资金</span>`;
+    html+=`</div>`;
+  }
+
+  if(sims.length){
+    html+=`<div style="display:flex;gap:2px;margin-top:3px;overflow-x:auto">`;
+    sims.slice(0,4).forEach((s,i)=>{
+      const on=(S.broMode==="auto"&&i===0)||S.broMode===s.key;
+      html+=`<div style="padding:1px 4px;border-radius:3px;font-size:7px;white-space:nowrap;border:1px solid ${on?"rgba(80,180,80,.2)":"rgba(255,255,255,.03)"};background:${on?"rgba(80,180,80,.08)":"transparent"};color:${on?"#8de88d":"#7d6d43"}">${s.label} → 均${s.favg} / 余${s.earned}${s.broFlow?" / 👥"+s.broFlow:""}</div>`;
+    });
+    html+=`</div>`;
+  }
+
+  el.innerHTML=html;
+  document.getElementById("broI").addEventListener("focus",markEditStart);
+  document.getElementById("broI").addEventListener("input",function(){ S.broN=normNum(this.value); save(); rHdr(); rRank(); });
+  document.getElementById("broI").addEventListener("blur",function(){ this.value=String(normNum(this.value)); commitEditUndo(S.ed); save(); });
+  document.getElementById("wyI").addEventListener("focus",markEditStart);
+  document.getElementById("wyI").addEventListener("input",function(){ S.finalBonus=normNum(this.value); save(); rHdr(); rRank(); rEdit(); });
+  document.getElementById("wyI").addEventListener("blur",function(){ this.value=String(normNum(this.value)); commitEditUndo(S.ed); save(); });
+  document.getElementById("rkI").addEventListener("input",function(){ S.rankHours=normNum(this.value)||72; save(); rHdr(); });
+  document.getElementById("rkI").addEventListener("blur",function(){ this.value=String(normNum(this.value)||72); save(); });
+  el.querySelectorAll("[data-phase]").forEach(btn=>btn.addEventListener("click",function(){ if(S.phaseMode===this.dataset.phase) return; setUndo({focusId:S.ed||null, type:"phase"}); S.phaseMode=this.dataset.phase; save(); rerender(); }));
+  el.querySelectorAll("[data-bmode]").forEach(btn=>btn.addEventListener("click",function(){ if(S.broMode===this.dataset.bmode) return; setUndo({focusId:S.ed||null, type:"broMode"}); S.broMode=this.dataset.bmode; save(); rerender(); }));
+  document.getElementById("expBtn").onclick=exportData;
+  document.getElementById("impBtn").onclick=importData;
+  document.getElementById("undoBtn").onclick=undoLast;
+  document.getElementById("clrBtn").onclick=resetData;
+}
+
+function rRank(){
+  const el=document.getElementById("rank");
+  const rs=buildActions(S.bs), maxS=rs.length?rs[0].score:1;
+  if(!rs.length){
+    el.innerHTML=`<div style="text-align:center;color:#5a4830;font-size:12px;padding:20px">先录入当前建筑数据。推荐会按阶段、宣传册节奏和开楼时的均值稀释来排序。</div>`;
+    return;
+  }
+  let html="";
+  rs.slice(0,14).forEach((r,i)=>{
+    const c=i===0?"#d03020":i===1?"#e08828":i===2?"#c0a030":"#3a3028";
+    const fl=S.flash===actionKey(r)?" flash":"";
+    const isUnlock=r.k==="unlock";
+    html+=`<div class="ri${fl}" style="border-color:${i<3?c+"22":"rgba(255,255,255,.02)"}${i===0?";background:rgba(208,48,32,.06)":""}">
+      <div class="bg" style="background:${c}">${i+1}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;gap:4px;flex-wrap:wrap">
+          <span class="tn">${r.ic} ${r.t}</span>
+          <span style="font-size:10px;color:#8a7a4a">${r.bN}</span>
+          ${r.low?'<span class="badge" style="color:#e08040;background:rgba(224,128,64,.08)">低收益</span>':""}
+          ${r.bw>1.15?`<span class="badge" style="color:#d06030;background:rgba(208,96,48,.06)">×${r.bw.toFixed(1)}</span>`:""}
+          ${isUnlock?'<span class="badge" style="color:#7fcf7f;background:rgba(127,207,127,.08)">铺楼候选</span>':""}
+        </div>
+        <div style="font-size:9px;color:#5a4830;display:flex;gap:5px;flex-wrap:wrap">
+          <span>${r.d}</span><span>${r.c}万</span>
+          <span style="color:${i===0?"#ff6040":"#9a8040"};font-weight:600">${isUnlock?"拟合值":"+"+r.g.toFixed(1)+"万/时"}</span>
+          ${!isUnlock?`<span style="color:#4a6a30">📜+${r.avgD.toFixed(1)}/本</span>`:""}
+          ${r.flowDelta>0?`<span style="color:#4a88c8;font-weight:600">👥+${r.flowDelta}/时</span>`:""}
+        </div>
+        <div style="font-size:8px;color:#75643d;margin-top:1px">${r.why||""}</div>
+        <div style="margin-top:2px;height:2px;border-radius:1px;background:rgba(255,255,255,.03)">
+          <div style="height:100%;border-radius:1px;width:${Math.max(2,(r.score/maxS*100))}%;background:${c}"></div>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;width:38px">
+        <div style="font-size:11px;font-weight:800;color:${i===0?"#ff5838":"#f5d98a"}">${(r.score*10000).toFixed(0)}</div>
+        <div style="font-size:6px;color:#3a2818">分</div>
+      </div>
+      <button class="ub${isUnlock?" alt":""}" data-act="${actionKey(r)}">${isUnlock?"开楼":"执行"}</button>
+    </div>`;
+  });
+  el.innerHTML=html;
+  el.querySelectorAll("[data-act]").forEach(btn=>btn.addEventListener("click",function(){
+    const act=rs.find(x=>actionKey(x)===this.dataset.act);
+    if(!act) return;
+    setUndo({focusId:act.bid, type:"action"});
+    S.bs=applyAction(S.bs,act);
+    S.flash=actionKey(act);
+    S.ed=act.bid;
+    save();
+    rerender();
+    setTimeout(()=>{ S.flash=null; rRank(); },500);
+  }));
+}
+
+function rTabs(){
+  const el=document.getElementById("tabs");
+  const avg=avgProfit(S.bs);
+  const opened=active(S.bs);
+  let html="";
+  opened.forEach(b=>{
+    const isLow=avg>0 && b.profit>0 && b.profit<avg*.7;
+    html+=`<button class="tb${S.ed===b.id?" act":""}${isLow?" low":""}" data-id="${b.id}">
+      <div style="font-size:10px;font-weight:800">${b.name||"?"}</div>
+      <div style="font-size:8px;opacity:.66">${b.profit||0}万/时</div></button>`;
+  });
+  if(opened.length<NAMES.length){
+    html+=`<button id="addBtn" style="padding:3px 8px;font-size:12px;font-weight:800;background:rgba(212,168,67,.1);border:1px dashed rgba(212,168,67,.3);border-radius:5px;color:#d4a843">+</button>`;
+  }
+  el.innerHTML=html;
+  el.querySelectorAll(".tb").forEach(t=>t.addEventListener("click",function(){
+    S.ed=S.ed===this.dataset.id?null:this.dataset.id;
+    save(); rTabs(); rEdit();
+  }));
+  const addBtn=document.getElementById("addBtn");
+  if(addBtn) addBtn.addEventListener("click",()=>{
+    const nxt=getNextBuilding(S.bs);
+    if(!nxt) return;
+    setUndo({focusId:nxt.id, type:"add"});
+    nxt.on=true;
+    S.ed=nxt.id;
+    save();
+    rerender();
+  });
+}
+
+function rEdit(){
+  const el=document.getElementById("edit");
+  const b=S.ed?S.bs.find(x=>x.id===S.ed):null;
+  if(!b){ el.style.display="none"; return; }
+  el.style.display="block";
+
+  function fi(lbl,val,key,w){
+    return `<div class="fd"><span>${lbl}</span><input type="text" inputMode="decimal" data-key="${key}" value="${val}" style="width:${w||64}px"></div>`;
+  }
+  function ck(key,chk){
+    return `<label class="chk" style="color:${chk?"#a33":"#555"}"><input type="checkbox" data-mkey="${key}" ${chk?"checked":""}> 满</label>`;
+  }
+
+  el.innerHTML=`
+    <div class="er">
+      <div class="fd"><span>名称</span><input type="text" id="enm" value="${b.name}" style="width:84px"></div>
+      ${fi("单价",b.price,"price",60)}
+      ${fi("客流/时",b.flow,"flow",64)}
+      ${fi("利润万/时",b.profit,"profit",72)}
+      ${fi("店长%",b.mgr,"mgr",44)}
+      ${fi("部件%",b.comp,"comp",44)}
+      <div class="fd"><span>培训%(已校正)</span><span id="empV" style="font-size:12px;font-weight:700;color:#6a5a38;padding:5px 0">${empP(b).toFixed(0)}</span></div>
+    </div>
+
+    <div class="er" style="margin-bottom:3px">
+      ${fi("当前等级",b.level,"level",52)}
+      ${fi("下次📣解锁",b.nextFU,"nextFU",60)}
+      ${fi("下次👥解锁",b.nextEU,"nextEU",60)}
+      ${b.level>0&&(b.nextFU>b.level||b.nextEU>b.level)?`<span style="font-size:9px;color:#88b868;padding:4px 0">${b.nextFU>b.level?`📣差${b.nextFU-b.level}级`:""} ${b.nextEU>b.level?`👥差${b.nextEU-b.level}级`:""}</span>`:""}
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:${b.mxP?0.3:1}"><span style="font-size:11px;line-height:28px">🏗</span>${fi("单价+",b.upPD,"upPD",48)}${fi("费用万",b.upPC,"upPC",58)}${ck("mxP",b.mxP)}</div>
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:${b.mxF?0.3:1}"><span style="font-size:11px;line-height:28px">📣</span>${fi("客流+",b.upFD,"upFD",48)}${fi("费用万",b.upFC,"upFC",58)}${ck("mxF",b.mxF)}</div>
+      <div style="display:flex;gap:4px;align-items:flex-end;opacity:${b.mxE?0.3:1}"><span style="font-size:11px;line-height:28px">👥</span>${fi("利润%",b.upED,"upED",48)}${fi("费用万",b.upEC,"upEC",58)}${ck("mxE",b.mxE)}</div>
+    </div>
+
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:6px">
+      <button id="cpyBtn" class="mini">复制上一栋模板</button>
+      <button id="delBtn" style="padding:3px 8px;font-size:9px;background:transparent;border:1px solid #2a2018;border-radius:4px;color:#5a4a30;margin-left:auto">删除</button>
+    </div>
+  `;
+
+  const enm=document.getElementById("enm");
+  enm.addEventListener("focus",markEditStart);
+  enm.addEventListener("input",function(){ b.name=this.value; save(); rTabs(); rHdr(); rRank(); });
+  enm.addEventListener("blur",function(){ commitEditUndo(S.ed); save(); });
+  el.querySelectorAll("[data-key]").forEach(inp=>{
+    inp.addEventListener("focus",markEditStart);
+    inp.addEventListener("input",function(){
+      b[this.dataset.key]=normNum(this.value);
+      save();
+      rHdr(); rRank(); rTabs();
+      const ev=document.getElementById("empV"); if(ev) ev.textContent=empP(b).toFixed(0);
+    });
+    inp.addEventListener("blur",function(){ this.value=String(normNum(this.value)); commitEditUndo(S.ed); save(); });
+  });
+  el.querySelectorAll("[data-mkey]").forEach(cb=>cb.addEventListener("change",function(){
+    setUndo({focusId:b.id, type:"toggleMax"});
+    b[this.dataset.mkey]=this.checked; save(); rHdr(); rRank(); rEdit();
+  }));
+  document.getElementById("cpyBtn").onclick=()=>{
+    setUndo({focusId:b.id, type:"copyTemplate"});
+    if(copyPrevTemplate(b.id)){ alert("已复制上一栋常用模板"); rerender(); }
+    else { UNDO=null; saveUndo(); alert("没有上一栋可复制"); }
+  };
+  document.getElementById("delBtn").onclick=()=>{
+    const idx=S.bs.findIndex(x=>x.id===b.id);
+    if(idx<2){ alert("前两栋不能删除"); return; }
+    setUndo({focusId:b.id, type:"delete"});
+    for(let i=idx;i<S.bs.length;i++){
+      const keepName=S.bs[i].name||NAMES[i]||("建筑"+(i+1));
+      S.bs[i]={...makeBuilding(i,false), id:S.bs[i].id, name:keepName};
+    }
+    S.ed=null;
+    save();
+    rerender();
+  };
+}
+function rerender(){ rHdr(); rRank(); rTabs(); rEdit(); }
+
+load();
+rerender();
+</script>
+
+
+</body></html>
